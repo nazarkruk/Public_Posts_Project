@@ -84,7 +84,7 @@ i{
     justify-content: center;
 }
 
-.section {
+.section:not(.featured-articles){
     padding-block: 10rem;
 
 }
@@ -160,7 +160,7 @@ i{
 }
 
 
-/* Articles */
+/
 
 .article{
     position: relative;
@@ -241,30 +241,30 @@ i{
 
 /* Older posts */
 
-.older-posts-grid-wrapper{
+.all-posts-grid-wrapper{
     gap: var(--gap);
     
 }
 
-.older-posts-article-image-wrapper,
-.older-posts .article{
+.all-posts-article-image-wrapper,
+.all-posts .article{
     min-height: var(--item-min-height-sm);
 }
 
-.older-posts .article{
+.all-posts .article{
     background-color: var(--secondary-background-color);
 }
 
-.older-posts-article-image-wrapper{
+.all-posts-article-image-wrapper{
     position: relative;
 }
 
-.older-posts-grid-wrapper .article-data-container{
+.all-posts-grid-wrapper .article-data-container{
     position: static;
     background-color: transparent;
 }
 
-.older-posts-grid-wrapper .article-title{
+.all-posts-grid-wrapper .article-title{
     margin-bottom: var(--margin-sm);
 }
 
@@ -494,12 +494,12 @@ i{
         grid-row: 4/6;
     }
 
-    .older-posts .article{
+    .all-posts .article{
         grid-template-columns: 25rem 1fr;
         
     }
 
-    .older-posts-article-image-wrapper{
+    .all-posts-article-image-wrapper{
         height: auto;
     }
 
@@ -580,7 +580,7 @@ i{
 }
 
 @media screen and (min-width: 1200px) {
-    .older-posts-grid-wrapper{
+    .all-posts-grid-wrapper{
         grid-template-columns: repeat(2, 1fr);
     }
 }

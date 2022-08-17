@@ -3,18 +3,22 @@ const BASE_URL = 'https://techcrunch.com/wp-json/wp/v2/posts'
 window.addEventListener('DOMContentLoaded', ()=> {
     getPosts()
 })
+
+// LOCATORS
 const mainContainer = document.getElementById('main-container')
 const allPostsAria = document.getElementById('show-posts')
 
-
-function getPosts (){
+//HOME PAGE
+let n = 6
+function getPosts (n = 6){
+    allPostsAria.innerHTML = ''
     //const allPostsAria = document.getElementById('show-posts')
-    fetch(BASE_URL + '?per_page=4&context=embed')
+    fetch(BASE_URL + "?per_page=" + `${n}`+ "&context=embed")
     .then(res => res.json())
     .then(data => {
         data.forEach(post => {
             allPostsAria.innerHTML += `
-            <a href="#" data-id="${post.id}" class="article d-grid">
+            <a href="#"  data-id="${post.id}" class="article d-grid">
             <div class="all-posts-article-image-wrapper">
                 <img src= ${post.jetpack_featured_media_url} alt="" class="article-image">
             </div>
@@ -33,16 +37,33 @@ function getPosts (){
        `
         })
         addReadFullPost()
+
     }) 
 
 }
 
+//SEE MORE POSTS
+
+const seeMoreBtn = document.getElementById("see-more-btn")
+seeMoreBtn.addEventListener('click', seeMorePosts)
+
+function seeMorePosts(){
+    
+    getPosts(n+=6)
+}
+
+
+
+//POST PAGE
+
 const addReadFullPost = () => {
-    const posts = document.querySelectorAll('a')
-    posts.forEach((post) => {
+    const postsHtmlCollection = document.getElementsByClassName("article d-grid")
+    let postsArray = Array.from(postsHtmlCollection)
+    postsArray.forEach((post) => {
         post.addEventListener('click', displayPost)
     })
 }
+
 
 
 const displayPost = (event) => {
@@ -76,9 +97,8 @@ const displayPost = (event) => {
                 <p>
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis eius possimus hic eligendi distinctio rerum incidunt, esse quasi eum molestiae ducimus ipsam quae, aliquid ullam placeat dolorum nulla vero. Quam? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero quod necessitatibus, aspernatur pariatur asperiores earum quas adipisci veritatis quidem facilis! Nihil veniam quaerat nulla possimus, asperiores vero voluptatum placeat. Eveniet!
                 </p>
-                <div class="author d-grid" id ='author-about' >
                 
-
+                <div class="author d-grid" id ='author-about' >
                 </div>
             </div>
         </div>
@@ -115,5 +135,7 @@ const displayPost = (event) => {
         })
     })
 }
+
+
 
 
